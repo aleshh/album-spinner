@@ -7,6 +7,10 @@ interface Album {
   name: string;
 }
 
+interface SpotifyData {
+  images: Array<any>;
+}
+
 const albums: Album[] = [
   { artist: "Joni Mitchell", name: "Blue" },
   { artist: "Adele", name: "21" },
@@ -25,7 +29,7 @@ const albums: Album[] = [
   { artist: "Martino Tirimo", name: "Debussy: 20 Favourites for Piano" },
   { artist: "Thelonious Monk", name: "Thelonious Alone In San Francisco" },
   {
-    artist: "Elliott Sharp, Mary Halvorson, and Marc Ribot",
+    artist: "Marc Ribot",
     name: "ERR Guitar",
   },
   { artist: "Bill Evans Trio", name: "Waltz For Debby" },
@@ -87,44 +91,88 @@ const albums: Album[] = [
 //   "Mississippi John Hurt",
 // ];
 
+const encode = (val: string): string =>
+  val.replace(/\s/g, "+").replace(/,/g, "");
+
 const getAlbum: any = () => {
   const album: Album = albums[Math.floor(Math.random() * albums.length)];
   return album;
 };
 
 const App = () => {
-  const [accessToken, setAccessToken] = useState(null);
+  const [accessToken, setAccessToken] = useState<SpotifyData | undefined>(
+    undefined
+  );
   const [album, setAlbum] = useState(getAlbum());
+  const [spotifyData, setSpotifyData] = useState(undefined);
 
+  // get and store access token
   useEffect(() => {
+    if (accessToken) return;
+
     const getAccessToken: any = async () => {
       const authorization = btoa(
         `${credentials["Client ID"]}:${credentials["Client Secret"]}`
       );
 
-      await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        body: "grant_type=client_credentials",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Basic ${authorization}`,
-        },
-      }).then((data) => {
-        console.log(
-          "····························································"
-        );
-        console.log(data);
-      });
+      const { access_token: newToken } = await fetch(
+        "https://accounts.spotify.com/api/token",
+        {
+          method: "POST",
+          body: "grant_type=client_credentials",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Basic ${authorization}`,
+          },
+        }
+      ).then((res) => res.json());
+
+      setAccessToken(newToken);
     };
 
     getAccessToken();
   }, [accessToken]);
 
-  // React.useEffect(() => {
-  //   fetch("https://api.spotify.com")
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data));
-  // }, [album]);
+  // get and store album info
+  React.useEffect(() => {
+    if (!accessToken) return;
+
+    const queryString = `q=${encode(album.name)}+${encode(
+      album.artist
+    )}&type=album`;
+
+    const getAlbum: any = async () => {
+      const {
+        albums: { items },
+      } = await fetch(`https://api.spotify.com/v1/search?${queryString}`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }).then((res) => res.json());
+
+      if (items.length > 1) {
+        console.warn(
+          "Received more than 1 result for",
+          album.artist,
+          ":",
+          album.name
+        );
+        console.log(items);
+      }
+
+      if (items.length === 0) {
+        console.warn("Received 0 results for", album.artist, ":", album.name);
+        setSpotifyData(undefined);
+        return;
+      }
+
+      setSpotifyData(items[0]);
+    };
+
+    getAlbum();
+  }, [accessToken, album]);
 
   const handleNewAlbum = () => setAlbum(getAlbum());
 
@@ -133,6 +181,7 @@ const App = () => {
       <div className="content">
         <h2>{album.artist}</h2>
         <h1>{album.name}</h1>
+        <img alt={album.name} src={spotifyData?.images?[0].url} />
         <button
           className="newAlbumButton"
           type="button"
