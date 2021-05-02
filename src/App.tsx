@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import credentials from "./credentials";
 
 interface Album {
   artist: string;
@@ -92,7 +93,38 @@ const getAlbum: any = () => {
 };
 
 const App = () => {
-  const [album, setAlbum] = React.useState(getAlbum());
+  const [accessToken, setAccessToken] = useState(null);
+  const [album, setAlbum] = useState(getAlbum());
+
+  useEffect(() => {
+    const getAccessToken: any = async () => {
+      const authorization = btoa(
+        `${credentials["Client ID"]}:${credentials["Client Secret"]}`
+      );
+
+      await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        body: "grant_type=client_credentials",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Basic ${authorization}`,
+        },
+      }).then((data) => {
+        console.log(
+          "····························································"
+        );
+        console.log(data);
+      });
+    };
+
+    getAccessToken();
+  }, [accessToken]);
+
+  // React.useEffect(() => {
+  //   fetch("https://api.spotify.com")
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // }, [album]);
 
   const handleNewAlbum = () => setAlbum(getAlbum());
 
