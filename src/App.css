@@ -12,13 +12,19 @@ html {
 
 .container {
   height: 100vh;
+  padding-left: 10vw;
+  padding-right: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .newAlbumButton {
+  margin-top: 50px;
   font-size: 20px;
   padding: 10px 50px;
   border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  outline: none;
 }
