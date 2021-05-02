@@ -8,7 +8,7 @@ interface Album {
 }
 
 interface SpotifyData {
-  images: Array<any>;
+  images: Array<{ url: string }>;
 }
 
 const albums: Album[] = [
@@ -29,7 +29,7 @@ const albums: Album[] = [
   { artist: "Martino Tirimo", name: "Debussy: 20 Favourites for Piano" },
   { artist: "Thelonious Monk", name: "Thelonious Alone In San Francisco" },
   {
-    artist: "Marc Ribot",
+    artist: "Elliott Sharp",
     name: "ERR Guitar",
   },
   { artist: "Bill Evans Trio", name: "Waltz For Debby" },
@@ -176,12 +176,18 @@ const App = () => {
 
   const handleNewAlbum = () => setAlbum(getAlbum());
 
+  console.log(typeof spotifyData);
+  // const imageUrl = spotifyData?.images ? [0].url;
+  const { images } = spotifyData || { images: [{ url: "" }] };
+  const { url } = images[0];
+
   return (
     <div className="container">
       <div className="content">
-        <h2>{album.artist}</h2>
-        <h1>{album.name}</h1>
-        <img alt={album.name} src={spotifyData?.images?[0].url} />
+        {url && <img className="albumCover" alt={album.name} src={url} />}
+        <h2>
+          {album.artist} — {album.name}
+        </h2>
         <button
           className="newAlbumButton"
           type="button"
