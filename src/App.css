@@ -24,14 +24,27 @@ html {
   width: 75vh;
   max-height: 80vw;
   max-width: 80vw;
+  box-shadow: 0 0 100px #555;
 }
 
-.newAlbumButton {
+.button {
   margin-top: 50px;
+  margin-right: 20px;
   font-size: 20px;
   padding: 10px 50px;
   border-radius: 10px;
   border: none;
   font-weight: bold;
   outline: none;
+  color: white;
+  border: 2px solid white;
+  background: transparent;
+}
+.button:last-child {
+  margin-right: 0;
+}
+
+.buttonPrimary {
+  color: black;
+  background-color: white;
 }

@@ -15,7 +15,7 @@ const albums: Album[] = [
   { artist: "Joni Mitchell", name: "Blue" },
   { artist: "Adele", name: "21" },
   { artist: "serpentwithfeet", name: "DEACON" },
-  { artist: "Tommy James & The Shondells", name: "Crimson & Clover" },
+  { artist: "Tommy James & The Shondells", name: "Crimson and Clover" },
   { artist: "The Mountain Goats", name: "Get Lonely" },
   { artist: "Tom Petty and the Heartbreakers", name: "Damn the Torpedoes" },
   { artist: "Mississippi John Hurt", name: "The 1928 Sessions" },
@@ -35,17 +35,17 @@ const albums: Album[] = [
   { artist: "Bill Evans Trio", name: "Waltz For Debby" },
   { artist: "Tomasz Stanko Quartet", name: "Matka Joanna" },
   { artist: "Jimmy Giuffre 3", name: "1961" },
-  { artist: "Yo-Yo Ma", name: "Bach: Cello Suites Nos. 1, 5 & 6" },
+  { artist: "Yo-Yo Ma", name: "Bach Trios" },
   {
     artist: "The Tallis Scholars",
-    name: "Heinrich Isaac - Missa De Apoltolis",
+    name: "Heinrich Isaac - Missa De Apostolis",
   },
   { artist: "Charles Mingus", name: "Oh Yeah" },
   { artist: "Masayoshi Fujita", name: "Apologues" },
   { artist: "Lisa Gerrard", name: "Immortal Memory" },
   { artist: "Dolly Parton", name: "Trio" },
   { artist: "The Beach Boys", name: "Pet Sounds" },
-  { artist: "King Tubby", name: "Dub From the Roots" },
+  { artist: "King Tubby", name: "Dub From The Roots" },
   { artist: "Talking Heads", name: "Speaking In Tongues" },
   { artist: "Willie Nelson", name: "Phases and Stages" },
   { artist: "John Coltrane", name: "Olé Coltrane" },
@@ -55,7 +55,7 @@ const albums: Album[] = [
   { artist: "Richard & Linda Thompson", name: "Shoot Out the Lights" },
   { artist: "Al Green", name: "Back Up Train" },
   { artist: "Etta James", name: "Tell Mama" },
-  { artist: "Miles Davis Sextet", name: "Walkin'" },
+  { artist: "Miles Davis", name: "Walkin'" },
   { artist: "Field Musicians", name: "Gamelan Music of Bali" },
   { artist: "Billie Holiday", name: "Live in Cologne, 1954" },
   { artist: "Cassandra Wilson", name: "Blue Light Til' Dawn" },
@@ -64,35 +64,136 @@ const albums: Album[] = [
   { artist: "Hiroshi Yoshimura", name: "Music for Nine Post Cards" },
   { artist: "John Cale", name: "Paris 1919" },
   { artist: "Janet Jackson", name: "Rhythm Nation 1814" },
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
-  // {artist: "", name: ""},
+  { artist: "Ann Peebles", name: "I Can't Stand the Rain" },
+  { artist: "Keith Jarrett", name: "After the Fall (Live)" },
+  { artist: "Funkadelic", name: "Maggot Brain" },
+  { artist: "Aretha Franklin", name: "Amazing Grace" },
+  { artist: "King Sunny Ade", name: "Juju Music" },
+  { artist: "Afrika Bambaataa", name: "Planet Rock: The Album" },
+  { artist: "Ambitious Lovers", name: "Ambitious Lovers" },
+  { artist: "Diana Ross", name: "Diana & Marvin" },
+  { artist: "Kings of Convenience", name: "Declaration of Dependence" },
+  { artist: "Renée Reed", name: "Renée Reed" },
+  {
+    artist: "Valerie June",
+    name: "The Moon and Stars: Prescriptions for Dreamers",
+  },
+  { artist: "Mia Doi Todd", name: "Music Life" },
+  { artist: "Angel Bat Dawid", name: "LIVE" },
+  { artist: "Jyoti", name: "Mama, You Can Bet!" },
+  { artist: "Bessie Jones", name: "Get in Union" },
+  { artist: "Fiona Apple", name: "Fetch The Bolt Cutters" },
+  { artist: "Phoebe Bridgers", name: "Punisher" },
+  { artist: "Nana Yamato", name: "Before Sunrise" },
+  { artist: "Dawn Penn", name: "Vintage, Vol. 1" },
+  { artist: "Nina Simone", name: "Fodder on My Wings" },
+  { artist: "Lucinda Williams", name: "Good Souls Better Angels" },
+  { artist: "Cocteau Twins", name: "Heaven or Las Vegas" },
+  { artist: "k.d. lang", name: "Ingénue" },
+  { artist: "Shannon Lay", name: "August" },
+  {
+    artist: "Bulgarian State Television Female Choir",
+    name: "Le Mystere des Voix Bulgares",
+  },
+  { artist: "Ladysmith Black Mambazo", name: "Ulwandle Olungcwele" },
+  { artist: "J.J. Cale", name: "Okie" },
+  { artist: "Tina Turner", name: "Private Dancer" },
+  { artist: "Belle & Sebastian", name: "Write About Love" },
+  {
+    artist: "Bill Monroe & His Blue Grass Boys",
+    name: "The Essential Bill Monroe (1945-1949)",
+  },
+  { artist: "Karl Hector & The Malcouns", name: "Unstraight Ahead" },
+  { artist: "D'Angelo", name: "Black Messiah" },
+  { artist: "Fleetwood Mac", name: "Then Play On" },
+  { artist: "Joni Mitchell", name: "Court and Spark" },
+  { artist: "Roxanne Shanté", name: "Bad Sister" },
+  { artist: "Archie Shepp", name: "Mama Too Tight" },
+  { artist: "Eric Dolphy", name: "Out to Lunch" },
+  { artist: "John Coltrane", name: "My Favorite Things" },
+  { artist: "Sonny Rollins", name: "Saxophone Colossus" },
+  { artist: "Cannonball Adderly", name: "Somethin' Else" },
+  {
+    artist: "Alice Coltrane",
+    name: "World Spirituality Classics 1: The Ecstatic Music of Alice Coltrane",
+  },
+  { artist: "Roxy Music", name: "Avalon" },
+  { artist: "Mirah", name: "Advisory Committee" },
+  { artist: "Sister Rosetta Tharpe", name: "Sister On Tour" },
+  { artist: "Grouper", name: "Dragging a Dead Deer Up a Hill" },
+  { artist: "Nobuto Suda", name: "Transitoriness" },
+  { artist: "Sylvain Chauveau", name: "Simple" },
+  { artist: "William Basinski", name: "92982" },
+  { artist: "Clarice Jensen", name: "For This from That Will Be Filled" },
+  {
+    artist: "Beatrice Dillon",
+    name: "Studies I-XVII for Samplers and Percussion",
+  },
+  { artist: "CV", name: "Thoughts of a Dot as It Travels a Surface" },
+  { artist: "Suso Saiz", name: "Between No Things" },
+  { artist: "Lizzo", name: "Lizzobangers" },
+  {
+    artist: "Carl Stalling",
+    name:
+      "The Carl Stalling Project - Music From Warner Bros. Cartoons 1936-1958",
+  },
+  { artist: "Modern Jazz Quartet", name: "Third Stream Music" },
+  { artist: "Bill Evans Trio", name: "Trio 65" },
+  { artist: "Louis Armstrong", name: "The Great Reunion" },
+  { artist: "Chet Baker", name: "Chet Baker Sings" },
+  { artist: "Ricki Lee Jones", name: "The Devil You Know" },
+  { artist: "Janis Joplin", name: "I Got Dem Ol' Kozmic Blues Again Mama!" },
+  { artist: "Joy Division", name: "Unknown Pleasures" },
+  { artist: "Bill Withers", name: "Just As I Am" },
+  { artist: "Sly & The Family Stone", name: "Fresh" },
+  { artist: "Gloria Lynne", name: "Try a Little Tenderness" },
+  { artist: "Donny Hathaway", name: "Live" },
+  { artist: "Paul McCartney", name: "Ram" },
+  { artist: "Sarah Vaughan", name: "How Long Has This Been Going On?" },
+  { artist: "Herman Max", name: "Bach: Passions-Oratorium" },
+  {
+    artist: "Berlin Philharmonic String Quintet",
+    name: "Dvořák String Quintets",
+  },
+  { artist: "Nash Ensemble", name: "Brahms: The String Quintets" },
+  { artist: "Francesco Pasqualotto", name: "Bruckner: Complete Piano Music" },
+  { artist: "Parliament", name: "Up For the Down Stroke" },
+  { artist: "Steely Dan", name: "Countdown to Ecstasy" },
+  { artist: "Robert Palmer", name: "Sneakin' Sally Through the Alley" },
+  { artist: "Latin Playboys", name: "Dose" },
+  { artist: "John Fahey", name: "The Transfiguration of Blind Joe Death " },
+  { artist: "Devendra Banhart", name: "Rejoicing in the Hands" },
+  { artist: "Dawn McCarthy", name: "What the Brothers Sang" },
+  { artist: "Bonnie Prince Billy", name: "The Letting Go" },
+  { artist: "Rhye", name: "Woman" },
+  { artist: "The xx", name: "xx" },
+  { artist: "Lightnin' Hopkins", name: "Autobiography In Blues" },
+  { artist: "John Lee Hooker", name: "More Real Blues" },
+  { artist: "Cowboy Junkies ", name: "Whites Off Earth Now" },
+  { artist: "Prince", name: "1999" },
+  { artist: "Arooj Aftab", name: "Vulture Prince" },
+  { artist: "Ketama", name: "Songhai, Vol. 2" },
+  { artist: "Ella Fitzgerald", name: "Love, Ella" },
+  { artist: "Chuck Johnson", name: "Balsams" },
+  { artist: "Thunder Mountain Singers", name: "One Voice, One Nation" },
+  { artist: "Mission Of Burma", name: "Signals, Calls and Marches" },
+  { artist: "Grant Green", name: "Sunday Mornin'" },
+  { artist: "Wire", name: "Pink Flag" },
+  { artist: "Jacky Terrasson", name: "Jacky Terrasson" },
+  // { artist: "", name: "" },
 ];
-
-// const artists = [
-//   "Nina Simone",
-//   "Tom Petty",
-//   "Bill Frisell",
-//   "John Fahey",
-//   "Mississippi John Hurt",
-// ];
 
 const encode = (val: string): string =>
   val.replace(/\s/g, "+").replace(/,/g, "");
+
+const fuzzyMatch = (val1: string, val2: string): boolean => {
+  val1 = val2.toLowerCase();
+  val2 = val2.toLowerCase();
+
+  return (
+    val1 === val2 || val1.indexOf(val2) !== -1 || val2.indexOf(val1) !== -1
+  );
+};
 
 const getAlbum: any = () => {
   const album: Album = albums[Math.floor(Math.random() * albums.length)];
@@ -160,6 +261,18 @@ const App = () => {
           album.name
         );
         console.log(items);
+
+        const matchingAlbum = items.find((alb: any) =>
+          alb.artists.find(
+            (a: any) =>
+              a.name === album.artist &&
+              fuzzyMatch(alb.name, album.name) &&
+              alb.album_type !== "single"
+          )
+        );
+
+        setSpotifyData(matchingAlbum);
+        return;
       }
 
       if (items.length === 0) {
@@ -174,12 +287,13 @@ const App = () => {
     getAlbum();
   }, [accessToken, album]);
 
-  const handleNewAlbum = () => setAlbum(getAlbum());
-
-  console.log(typeof spotifyData);
-  // const imageUrl = spotifyData?.images ? [0].url;
-  const { images } = spotifyData || { images: [{ url: "" }] };
+  const { images, uri } = spotifyData || { images: [{ url: "" }], uri: "" };
   const { url } = images[0];
+
+  const handleNewAlbum = () => setAlbum(getAlbum());
+  const handleOpenAlbum = () => {
+    window.open(uri);
+  };
 
   return (
     <div className="container">
@@ -188,12 +302,15 @@ const App = () => {
         <h2>
           {album.artist} — {album.name}
         </h2>
+        <button className="button" type="button" onClick={handleNewAlbum}>
+          New pick
+        </button>
         <button
-          className="newAlbumButton"
+          className="button buttonPrimary"
           type="button"
-          onClick={handleNewAlbum}
+          onClick={handleOpenAlbum}
         >
-          New Album
+          Play this
         </button>
       </div>
     </div>
