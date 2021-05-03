@@ -12,7 +12,6 @@ interface SpotifyData {
 }
 
 const albums: Album[] = [
-  { artist: "Joni Mitchell", name: "Blue" },
   { artist: "Adele", name: "21" },
   { artist: "serpentwithfeet", name: "DEACON" },
   { artist: "Tommy James & The Shondells", name: "Crimson and Clover" },
@@ -177,26 +176,67 @@ const albums: Album[] = [
   { artist: "Chuck Johnson", name: "Balsams" },
   { artist: "Thunder Mountain Singers", name: "One Voice, One Nation" },
   { artist: "Mission Of Burma", name: "Signals, Calls and Marches" },
-  { artist: "Grant Green", name: "Sunday Mornin'" },
+  { artist: "Grant Green", name: "Visions" },
   { artist: "Wire", name: "Pink Flag" },
   { artist: "Jacky Terrasson", name: "Jacky Terrasson" },
+  {
+    artist: "A Tribe Called Quest",
+    name: "We got it from Here... Thank You 4 Your service",
+  },
+  { artist: "Blackalicious", name: "Blazing Arrow" },
+  { artist: "Destroyer", name: "Have We Met" },
+  { artist: "Gary Peacock", name: "Good Morning Heartache" },
+  { artist: "Khatia Buniatishvili", name: "Schubert" },
+  { artist: "Al Green", name: "Higher Plane" },
+  { artist: "Richard Thompson", name: "Mirror Blue" },
+  { artist: "Bon Iver", name: "i,i" },
+  { artist: "Japanese Breakfast", name: "Psychopomp" },
+  { artist: "Stan Getz", name: "Getz / Gilberto '76" },
+  { artist: "Ron Miles", name: "Heaven" },
+  { artist: "Anenon", name: "Tongue" },
+  { artist: "Ivan Mladek", name: "Dobrý Den!" },
+  { artist: "The Upsetters", name: "Clint Eastwood" },
+  { artist: "Lee Scratch Perry", name: "Scratch Attack!" },
+  { artist: "Van Morrison", name: "His Band and the Street Choir" },
+  { artist: "Jenny Hval", name: "Blood Bitch" },
+  { artist: "Neil Young", name: "Hitchhiker" },
+  { artist: "Yoko Ono", name: "Fly" },
+  { artist: "Surprise Chef", name: "Daylight Savings" },
+  { artist: "Madvillain", name: "Madvillainy" },
+  { artist: "Cleaners from Venus", name: "Midnight Cleaners" },
+  { artist: "Alton Ellis", name: "I'm Still in Love With You" },
+  { artist: "Louise Bock", name: "Sketch for WinterVII - Abyss: For Cello" },
+  { artist: "Eve Adams", name: "Metal Bird" },
+  { artist: "Jon Balke", name: "Siwan" },
+  { artist: "Saint Etienne", name: "Foxbase Alpha" },
+  { artist: "The Meters", name: "The Meters" },
+  { artist: "János Starker", name: "Suites for Solo Cello" },
+  { artist: "Ernesto Djedje", name: "Roi du Ziglibithy" },
+  { artist: "Unknown Mortal Orchestra", name: "II" },
+  { artist: "The Weather Station", name: "Ignorance" },
+  { artist: "Lyra Pramuk", name: "Fountain" },
   // { artist: "", name: "" },
 ];
 
 const encode = (val: string): string =>
-  val.replace(/\s/g, "+").replace(/,/g, "");
+  val.replace(/\s/g, "+").replace(/,/g, "+");
 
 const fuzzyMatch = (val1: string, val2: string): boolean => {
-  val1 = val2.toLowerCase();
-  val2 = val2.toLowerCase();
+  const encode = (val: string): string =>
+    val.toLowerCase().replace(/[^0-9a-zA-Z]/g, "");
+
+  val1 = encode(val1);
+  val2 = encode(val2);
 
   return (
     val1 === val2 || val1.indexOf(val2) !== -1 || val2.indexOf(val1) !== -1
   );
 };
 
-const getAlbum: any = () => {
-  const album: Album = albums[Math.floor(Math.random() * albums.length)];
+const shuffleAlbum: any = () => {
+  const i = Math.floor(Math.random() * albums.length);
+  console.log(i);
+  const album: Album = albums[i];
   return album;
 };
 
@@ -204,8 +244,10 @@ const App = () => {
   const [accessToken, setAccessToken] = useState<SpotifyData | undefined>(
     undefined
   );
-  const [album, setAlbum] = useState(getAlbum());
+  const [album, setAlbum] = useState(shuffleAlbum());
   const [spotifyData, setSpotifyData] = useState(undefined);
+
+  console.log(album);
 
   // get and store access token
   useEffect(() => {
@@ -260,7 +302,6 @@ const App = () => {
           ":",
           album.name
         );
-        console.log(items);
 
         const matchingAlbum = items.find((alb: any) =>
           alb.artists.find(
@@ -289,8 +330,9 @@ const App = () => {
 
   const { images, uri } = spotifyData || { images: [{ url: "" }], uri: "" };
   const { url } = images[0];
+  const albumString = `${album.artist} — ${album.name}`;
 
-  const handleNewAlbum = () => setAlbum(getAlbum());
+  const handleNewAlbum = () => setAlbum(shuffleAlbum());
   const handleOpenAlbum = () => {
     window.open(uri);
   };
@@ -298,20 +340,32 @@ const App = () => {
   return (
     <div className="container">
       <div className="content">
-        {url && <img className="albumCover" alt={album.name} src={url} />}
-        <h2>
-          {album.artist} — {album.name}
-        </h2>
-        <button className="button" type="button" onClick={handleNewAlbum}>
-          New pick
-        </button>
-        <button
-          className="button buttonPrimary"
-          type="button"
-          onClick={handleOpenAlbum}
-        >
-          Play this
-        </button>
+        {url && (
+          <button
+            className="imageButton"
+            type="button"
+            onClick={handleOpenAlbum}
+          >
+            <img
+              className="albumCover"
+              alt={albumString}
+              title={albumString}
+              src={url}
+            />
+          </button>
+        )}
+        <div className="buttonContainer">
+          <button className="button" type="button" onClick={handleNewAlbum}>
+            New pick
+          </button>
+          <button
+            className="button buttonPrimary"
+            type="button"
+            onClick={handleOpenAlbum}
+          >
+            Play this
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -12,39 +12,77 @@ html {
 
 .container {
   height: 100vh;
-  padding-left: 10vw;
-  padding-right: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+.content {
+  width: 100%;
+}
+
 .albumCover {
-  height: 75vh;
   width: 75vh;
-  max-height: 80vw;
   max-width: 80vw;
   box-shadow: 0 0 100px #555;
 }
 
+.imageButton {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+}
+
 .button {
-  margin-top: 50px;
-  margin-right: 20px;
+  margin-top: 20px;
+  margin-right: 4px;
   font-size: 20px;
   padding: 10px 50px;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   border: none;
   font-weight: bold;
   outline: none;
-  color: white;
-  border: 2px solid white;
-  background: transparent;
+  color: black;
+  background-color: #bbb;
+  cursor: pointer;
+  transition: all 300ms;
 }
 .button:last-child {
   margin-right: 0;
 }
+.button:hover {
+  background-color: #aaa;
+}
 
 .buttonPrimary {
-  color: black;
-  background-color: white;
+  background-color: #eee;
+  border-radius: 0 10px 10px 0;
+}
+.buttonPrimary:hover {
+  background-color: #ddd;
+}
+
+@media only screen and (max-width: 490px) {
+  .albumCover {
+    max-width: 90vw;
+  }
+
+  .button {
+    font-size: 15px;
+    padding: 10px 30px;
+    margin-right: 2px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .button {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+}
+@media only screen and (max-width: 319px) {
+  .button {
+    border-radius: 10px;
+  }
 }
