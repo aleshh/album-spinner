@@ -80,13 +80,6 @@ const App = () => {
       }).then((res) => res.json());
 
       if (items.length > 1) {
-        console.warn(
-          "Received more than 1 result for",
-          album.artist,
-          ":",
-          album.name
-        );
-
         const matchingAlbum = items.find((alb: SpotifyData) =>
           alb.artists.find(
             (a: any) =>
