@@ -30,18 +30,17 @@ const Page = ({
             />
           </button>
         )}
-        <div className="buttonContainer">
-          <button className="button" type="button" onClick={onNewAlbum}>
-            New pick
-          </button>
-          <button
-            className="button buttonPrimary"
-            type="button"
-            onClick={onOpenAlbum}
-          >
-            Play this
-          </button>
-        </div>
+        <h2>{albumString}</h2>
+        <button className="button" type="button" onClick={onNewAlbum}>
+          New pick
+        </button>
+        <button
+          className="button buttonPrimary"
+          type="button"
+          onClick={onOpenAlbum}
+        >
+          Play this
+        </button>
       </div>
     </div>
   );
