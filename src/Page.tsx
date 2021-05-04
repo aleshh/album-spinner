@@ -22,12 +22,7 @@ const Page = ({
       <div className="content">
         {url && (
           <button className="imageButton" type="button" onClick={onOpenAlbum}>
-            <img
-              className="albumCover"
-              alt={albumString}
-              title={albumString}
-              src={url}
-            />
+            <img className="albumCover" alt={albumString} src={url} />
           </button>
         )}
         <h2>{albumString}</h2>

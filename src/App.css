@@ -8,16 +8,25 @@ html {
   background-color: #222;
   color: white;
   font-size: 20px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+#root {
+  height: 100%;
 }
 
 h2 {
+  margin-top: 5px;
   font-size: 0.7rem;
   text-align: left;
   font-weight: normal;
 }
 
 .container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,15 +39,16 @@ h2 {
 }
 
 .albumCover {
+  vertical-align: top; /* removes extra height from parent button */
   width: 100%;
-  box-shadow: 0 0 100px #555;
 }
 
 .imageButton {
   border: none;
   outline: none;
   cursor: pointer;
-  background: transparent;
+  padding: 0;
+  box-shadow: 0 0 100px #555;
 }
 
 .button {
