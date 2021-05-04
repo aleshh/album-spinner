@@ -52,7 +52,11 @@ const App = () => {
             Authorization: `Basic ${authorization}`,
           },
         }
-      ).then((res) => res.json());
+      )
+        .then((res) => res.json())
+        .catch((error) => {
+          console.error(error);
+        });
 
       setAccessToken(newToken);
     };
@@ -69,18 +73,32 @@ const App = () => {
     )}&type=album`;
 
     const getAlbum = async (): Promise<void> => {
-      const {
-        albums: { items },
-      } = await fetch(`https://api.spotify.com/v1/search?${queryString}`, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }).then((res) => res.json());
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?${queryString}`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .catch((error) => {
+          console.error(error);
+        });
 
-      if (items.length > 1) {
-        const matchingAlbum = items.find((alb: SpotifyData) =>
+      if (response.error) {
+        setAccessToken(undefined);
+        return;
+      }
+
+      const {
+        albums: { items: fetchedAlbums },
+      } = response;
+
+      if (fetchedAlbums.length > 1) {
+        const matchingAlbum = fetchedAlbums.find((alb: SpotifyData) =>
           alb.artists.find(
             (a: any) =>
               a.name === album.artist &&
@@ -93,13 +111,13 @@ const App = () => {
         return;
       }
 
-      if (items.length === 0) {
+      if (fetchedAlbums.length === 0) {
         console.warn("Received 0 results for", album.artist, ":", album.name);
         setSpotifyData(undefined);
         return;
       }
 
-      setSpotifyData(items[0]);
+      setSpotifyData(fetchedAlbums[0]);
     };
 
     getAlbum();
