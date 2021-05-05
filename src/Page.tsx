@@ -1,11 +1,11 @@
-import "./App.css";
+import { usePalette } from "react-palette";
 
 type PageProps = {
   onOpenAlbum: () => void;
   onNewAlbum: () => void;
   artist: string;
   albumName: string;
-  url: string;
+  imageUrl: string;
 };
 
 const Page = ({
@@ -13,16 +13,22 @@ const Page = ({
   onNewAlbum,
   artist,
   albumName,
-  url,
+  imageUrl,
 }: PageProps): JSX.Element => {
+  const { data: colors } = usePalette(imageUrl);
   const albumString = `${artist} — ${albumName}`;
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        backgroundImage: `linear-gradient(${colors.vibrant}, #000`,
+      }}
+    >
       <div className="content">
-        {url && (
+        {imageUrl && (
           <button className="imageButton" type="button" onClick={onOpenAlbum}>
-            <img className="albumCover" alt={albumString} src={url} />
+            <img className="albumCover" alt={albumString} src={imageUrl} />
           </button>
         )}
         <h2>{albumString}</h2>

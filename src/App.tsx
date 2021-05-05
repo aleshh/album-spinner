@@ -97,6 +97,8 @@ const App = () => {
         albums: { items: fetchedAlbums },
       } = response;
 
+      console.log(fetchedAlbums);
+
       if (fetchedAlbums.length > 1) {
         const matchingAlbum = fetchedAlbums.find((alb: SpotifyData) =>
           alb.artists.find(
@@ -124,7 +126,7 @@ const App = () => {
   }, [accessToken, album]);
 
   const { images, uri } = spotifyData || { images: [{ url: "" }], uri: "" };
-  const { url } = images[0];
+  const { url: imageUrl } = images[0];
 
   const handleNewAlbum = () => setAlbum(shuffleAlbum());
   const handleOpenAlbum = () => {
@@ -137,7 +139,7 @@ const App = () => {
       onNewAlbum={handleNewAlbum}
       artist={album.artist}
       albumName={album.name}
-      url={url}
+      imageUrl={imageUrl}
     />
   );
 };
