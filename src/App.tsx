@@ -20,15 +20,26 @@ const fuzzyMatch = (val1: string, val2: string): boolean => {
   );
 };
 
-const shuffleAlbum = (): Album => {
-  const i = Math.floor(Math.random() * albums.length);
-  const album: Album = albums[i];
+const shuffleAlbum = (previous: Array<Album>): Album => {
+  let isNew = false;
+  let album: Album;
+  const search = (prev: Album): boolean => prev === album;
+
+  do {
+    const i = Math.floor(Math.random() * albums.length);
+    album = albums[i];
+    if (!previous.find(search)) {
+      isNew = true;
+    }
+  } while (!isNew);
+
   return album;
 };
 
 const App = () => {
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
-  const [album, setAlbum] = useState<Album>(shuffleAlbum());
+  const [album, setAlbum] = useState<Album>(shuffleAlbum([]));
+  const [previous, setPrevious] = useState<Album[]>([]);
   const [spotifyData, setSpotifyData] = useState<SpotifyData | undefined>(
     undefined
   );
@@ -97,8 +108,6 @@ const App = () => {
         albums: { items: fetchedAlbums },
       } = response;
 
-      console.log(fetchedAlbums);
-
       if (fetchedAlbums.length > 1) {
         const matchingAlbum = fetchedAlbums.find((alb: SpotifyData) =>
           alb.artists.find(
@@ -128,7 +137,15 @@ const App = () => {
   const { images, uri } = spotifyData || { images: [{ url: "" }], uri: "" };
   const { url: imageUrl } = images[0];
 
-  const handleNewAlbum = () => setAlbum(shuffleAlbum());
+  const handleNewAlbum = () => {
+    const newAlbum = shuffleAlbum(previous);
+    const newPrev = [...previous, newAlbum];
+    if (newPrev.length > albums.length / 2) {
+      newPrev.shift();
+    }
+    setPrevious(newPrev);
+    setAlbum(newAlbum);
+  };
   const handleOpenAlbum = () => {
     window.open(uri);
   };
