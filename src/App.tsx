@@ -139,9 +139,9 @@ const App = () => {
 
   const handleNewAlbum = () => {
     const newAlbum = shuffleAlbum(previous);
-    const newPrev = [...previous, newAlbum];
+    const newPrev = [newAlbum, ...previous];
     if (newPrev.length > albums.length / 2) {
-      newPrev.shift();
+      newPrev.pop();
     }
     setPrevious(newPrev);
     setAlbum(newAlbum);
