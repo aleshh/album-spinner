@@ -232,6 +232,7 @@ const albums: Album[] = [
   { artist: "Razika", name: "Program 91" },
   { artist: "Vashti Bunyan", name: "Just Another Diamond Day" },
   { artist: "Massive Attack", name: "Mezzanine" },
+  { artist: "Photek", name: "Modus Operandi" },
   // { artist: "", name: "" },
 ];
 
