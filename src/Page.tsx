@@ -31,14 +31,26 @@ const Page = ({
             <img className="albumCover" alt={albumString} src={imageUrl} />
           </button>
         )}
-        <h2>{albumString}</h2>
-        <button className="button" type="button" onClick={onNewAlbum}>
+        <h2 style={{ color: colors.lightVibrant }}>{albumString}</h2>
+        <button
+          className="button"
+          type="button"
+          onClick={onNewAlbum}
+          style={{
+            borderColor: colors.lightVibrant,
+            color: colors.lightVibrant,
+          }}
+        >
           New pick
         </button>
         <button
           className="button buttonPrimary"
           type="button"
           onClick={onOpenAlbum}
+          style={{
+            backgroundColor: colors.lightVibrant,
+            borderColor: colors.lightVibrant,
+          }}
         >
           Play this
         </button>
