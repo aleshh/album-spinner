@@ -26,11 +26,13 @@ const Page = ({
       }}
     >
       <div className="content">
-        {imageUrl && (
-          <button className="imageButton" type="button" onClick={onOpenAlbum}>
-            <img className="albumCover" alt={albumString} src={imageUrl} />
-          </button>
-        )}
+        <div className="imageContainer">
+          {imageUrl && (
+            <button className="imageButton" type="button" onClick={onOpenAlbum}>
+              <img className="albumCover" alt={albumString} src={imageUrl} />
+            </button>
+          )}
+        </div>
         <h2 style={{ color: colors.lightVibrant }}>{albumString}</h2>
         <button
           className="button"
