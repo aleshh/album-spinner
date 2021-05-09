@@ -22,7 +22,7 @@ const Page = ({
     <div
       className="container"
       style={{
-        backgroundImage: `linear-gradient(${colors.vibrant}, #000`,
+        backgroundImage: `linear-gradient(${colors.vibrant}, ${colors.darkMuted}`,
       }}
     >
       <div className="content">
@@ -50,6 +50,7 @@ const Page = ({
           style={{
             backgroundColor: colors.lightVibrant,
             borderColor: colors.lightVibrant,
+            color: colors.darkMuted,
           }}
         >
           Play this
