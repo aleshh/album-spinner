@@ -33,6 +33,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: rgb(0 0 0 / 13%) 0px -50vh 50vh inset;
 }
 
 .content {
