@@ -8,16 +8,16 @@ import { Album, SpotifyData } from "./interfaces";
 const encode = (val: string): string =>
   val.replace(/\s/g, "+").replace(/,/g, "+");
 
-const fuzzyMatch = (val1: string, val2: string): boolean => {
+const fuzzyMatch = (val1: string, val2: string): number => {
   const encode = (val: string): string =>
     val.toLowerCase().replace(/[^0-9a-zA-Z]/g, "");
 
   val1 = encode(val1);
   val2 = encode(val2);
 
-  return (
-    val1 === val2 || val1.indexOf(val2) !== -1 || val2.indexOf(val1) !== -1
-  );
+  if (val1 === val2) return 2;
+  if (val1.indexOf(val2) !== -1 || val2.indexOf(val1) !== -1) return 1;
+  return 0;
 };
 
 const shuffleAlbum = (previous: Array<Album>): Album => {
@@ -109,16 +109,22 @@ const App = () => {
       } = response;
 
       if (fetchedAlbums.length > 1) {
-        const matchingAlbum = fetchedAlbums.find((alb: SpotifyData) =>
-          alb.artists.find(
-            (a: any) =>
-              a.name === album.artist &&
-              fuzzyMatch(alb.name, album.name) &&
-              alb.album_type !== "single"
+        // Scores each returned album a point for any artist match, a point for
+        // partial album name match, another point for an exact album name
+        // match. We want to prefer, e.g., "Nūr" over "Nūr (Remixes)"
+        const scores = fetchedAlbums.map((a: SpotifyData) => {
+          const artistScore = !!a.artists.find((artist: any) =>
+            fuzzyMatch(artist.name, album.artist)
           )
-        );
+            ? 1
+            : 0;
+          const albumScore = fuzzyMatch(a.name, album.name);
+          return artistScore + albumScore;
+        });
 
-        setSpotifyData(matchingAlbum);
+        let indexOfBestMatch = scores.indexOf(Math.max(...scores));
+
+        setSpotifyData(fetchedAlbums[indexOfBestMatch]);
         return;
       }
 

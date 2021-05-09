@@ -211,7 +211,7 @@ const albums: Album[] = [
   { artist: "Nick Drake", name: "Family Tree" },
   { artist: "The Starlights", name: "Soldering: Reggae's Greatest Hits" },
   { artist: "Zola Jesus", name: "Versions" },
-  // { artist: "Dua Saleh", name: "Nūr" }, // catches 'Nūr - The Remixes'
+  { artist: "Dua Saleh", name: "Nūr" },
   { artist: "Yo La Tengo", name: "The Sounds of the Sounds of Science" },
   { artist: "Rosie Lowe", name: "Control" },
   {
@@ -233,6 +233,7 @@ const albums: Album[] = [
   { artist: "Vashti Bunyan", name: "Just Another Diamond Day" },
   { artist: "Massive Attack", name: "Mezzanine" },
   { artist: "Photek", name: "Modus Operandi" },
+  { artist: "Marianne Faithfull", name: "Broken English" },
   // { artist: "", name: "" },
 ];
 
