@@ -279,6 +279,14 @@ const albums: Album[] = [
   { artist: "Nation of Launguage", name: "Introduction, Presence" },
   { artist: "Amber Coffman", name: "City of No Reply" },
   { artist: "Dirty Projectors", name: "Lamp Lit Prose" },
+  {
+    artist: "Emahoy Tsegué-Maryam Guèbrou",
+    name: "Éthiopiques, Vol. 21: Emahoy (Piano Solo)",
+  },
+  { artist: "Ali Shaheed Muhammad", name: "Azymuth" },
+  { artist: "Laurie Spiegel", name: "The Expanding Universe" },
+  { artist: "Pauline Oliveros", name: "Deep Listening" },
+  { artist: "Suzanne Ciani", name: "Seven Waves" },
   // { artist: "", name: "" },
 ];
 
