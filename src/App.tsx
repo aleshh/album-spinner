@@ -5,10 +5,11 @@ import albums from "./albums";
 import credentials from "./credentials";
 import { Album, SpotifyData } from "./interfaces";
 
-const encode = (val: string): string =>
-  val.replace(/\s/g, "+").replace(/,/g, "+");
+function encode(val: string): string {
+  return val.replace(/\s/g, "+").replace(/,/g, "+");
+}
 
-const fuzzyMatch = (val1: string, val2: string): number => {
+function fuzzyMatch(val1: string, val2: string): number {
   const encode = (val: string): string =>
     val.toLowerCase().replace(/[^0-9a-zA-Z]/g, "");
 
@@ -18,9 +19,9 @@ const fuzzyMatch = (val1: string, val2: string): number => {
   if (val1 === val2) return 2;
   if (val1.indexOf(val2) !== -1 || val2.indexOf(val1) !== -1) return 1;
   return 0;
-};
+}
 
-const shuffleAlbum = (previous: Array<Album>): Album => {
+function shuffleAlbum(previous: Array<Album>): Album {
   let isNew = false;
   let album: Album;
   const search = (prev: Album): boolean => prev === album;
@@ -34,16 +35,21 @@ const shuffleAlbum = (previous: Array<Album>): Album => {
   } while (!isNew);
 
   return album;
-};
+}
 
-const encodeUrl = (album: Album): string => {
+function encodeUrl(album: Album): string {
   const string = `${album.artist}-${album.name}`;
   const withoutPunctuation = string.replace(/[^0-9a-zA-Z -]/g, "");
   const withoutSpaces = withoutPunctuation.replace(/ /g, "-");
   return withoutSpaces.toLowerCase();
-};
+}
 
-const App = () => {
+function setUrl(album: Album): void {
+  const albumString = encodeUrl(album);
+  window.history.pushState(album, albumString, albumString);
+}
+
+function App() {
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
   const [album, setAlbum] = useState<Album>(shuffleAlbum([]));
   const [previous, setPrevious] = useState<Album[]>([]);
@@ -52,22 +58,13 @@ const App = () => {
 
   const urlString = window.location.pathname.substring(1);
 
-  const assignUrl = (album: Album): void => {
-    const albumString = encodeUrl(album);
-    window.history.pushState(album, albumString, albumString);
-  };
-
   if (!urlString) {
-    assignUrl(album);
+    setUrl(album);
   }
 
   if (urlString !== encodeUrl(album)) {
-    // console.log(urlString !== encodeUrl(album));
-    // console.log("got", urlString);
     const albumFromUrl = albums.find((a) => encodeUrl(a) === urlString);
-    // console.log("found", album);
     if (albumFromUrl) {
-      // console.log("setting!");
       setAlbum(albumFromUrl);
     }
   }
@@ -179,7 +176,7 @@ const App = () => {
     }
     setPrevious(newPrev);
     setAlbum(newAlbum);
-    assignUrl(newAlbum);
+    setUrl(newAlbum);
   };
 
   const handleOpenAlbum = () => {
@@ -195,6 +192,6 @@ const App = () => {
       imageUrl={imageUrl}
     />
   );
-};
+}
 
 export default App;
