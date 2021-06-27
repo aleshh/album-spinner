@@ -1,4 +1,5 @@
 import { usePalette } from "react-palette";
+import useLongPress from "./hooks/useLongPress";
 
 type PageProps = {
   onOpenAlbum: () => void;
@@ -17,6 +18,24 @@ const Page = ({
 }: PageProps): JSX.Element => {
   const { data: colors } = usePalette(imageUrl);
   const albumString = `${artist} — ${albumName}`;
+
+  const onPrimaryLongPress = () => {
+    navigator.clipboard.writeText(`${artist} ${albumName}`).then(
+      function () {
+        console.log("success");
+        /* clipboard successfully set */
+      },
+      function (e) {
+        console.log("fail", e);
+        /* clipboard write failed */
+      }
+    );
+  };
+
+  const primaryButtonEvents = useLongPress(onPrimaryLongPress, onOpenAlbum, {
+    shouldPreventDefault: true,
+    delay: 500,
+  });
 
   return (
     <div
@@ -46,9 +65,9 @@ const Page = ({
           New pick
         </button>
         <button
-          className="button buttonPrimary"
+          className="button"
           type="button"
-          onClick={onOpenAlbum}
+          {...primaryButtonEvents}
           style={{
             backgroundColor: colors.lightVibrant,
             borderColor: colors.lightVibrant,
