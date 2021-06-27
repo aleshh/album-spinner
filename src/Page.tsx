@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { usePalette } from "react-palette";
+import Tooltip from "@material-ui/core/Tooltip";
 import useLongPress from "./hooks/useLongPress";
 
 type PageProps = {
@@ -16,18 +18,24 @@ const Page = ({
   albumName,
   imageUrl,
 }: PageProps): JSX.Element => {
+  const [tooltipText, setTooltipText] = useState("");
   const { data: colors } = usePalette(imageUrl);
   const albumString = `${artist} — ${albumName}`;
+
+  // clear tooltip text after a few seconds
+  useEffect(() => {
+    setTimeout(() => {
+      setTooltipText("");
+    }, 3000);
+  }, [tooltipText]);
 
   const onPrimaryLongPress = () => {
     navigator.clipboard.writeText(`${artist} ${albumName}`).then(
       function () {
-        console.log("success");
-        /* clipboard successfully set */
+        setTooltipText("Album name copied");
       },
       function (e) {
-        console.log("fail", e);
-        /* clipboard write failed */
+        setTooltipText("Album name copy failed!");
       }
     );
   };
@@ -64,18 +72,20 @@ const Page = ({
         >
           New pick
         </button>
-        <button
-          className="button"
-          type="button"
-          {...primaryButtonEvents}
-          style={{
-            backgroundColor: colors.lightVibrant,
-            borderColor: colors.lightVibrant,
-            color: colors.darkMuted,
-          }}
-        >
-          Play this
-        </button>
+        <Tooltip open={!!tooltipText} title={tooltipText} arrow placement="top">
+          <button
+            className="button"
+            type="button"
+            {...primaryButtonEvents}
+            style={{
+              backgroundColor: colors.lightVibrant,
+              borderColor: colors.lightVibrant,
+              color: colors.darkMuted,
+            }}
+          >
+            Play this
+          </button>
+        </Tooltip>
       </div>
     </div>
   );
