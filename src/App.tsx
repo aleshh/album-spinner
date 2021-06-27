@@ -37,37 +37,13 @@ function shuffleAlbum(previous: Array<Album>): Album {
   return album;
 }
 
-function encodeUrl(album: Album): string {
-  const string = `${album.artist}-${album.name}`;
-  const withoutPunctuation = string.replace(/[^0-9a-zA-Z -]/g, "");
-  const withoutSpaces = withoutPunctuation.replace(/ /g, "-");
-  return withoutSpaces.toLowerCase();
-}
-
-function setUrl(album: Album): void {
-  const albumString = encodeUrl(album);
-  window.history.pushState(album, albumString, albumString);
-}
-
 function App() {
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
   const [album, setAlbum] = useState<Album>(shuffleAlbum([]));
   const [previous, setPrevious] = useState<Album[]>([]);
-  const [spotifyData, setSpotifyData] =
-    useState<SpotifyData | undefined>(undefined);
-
-  const urlString = window.location.pathname.substring(1);
-
-  if (!urlString) {
-    setUrl(album);
-  }
-
-  if (urlString !== encodeUrl(album)) {
-    const albumFromUrl = albums.find((a) => encodeUrl(a) === urlString);
-    if (albumFromUrl) {
-      setAlbum(albumFromUrl);
-    }
-  }
+  const [spotifyData, setSpotifyData] = useState<SpotifyData | undefined>(
+    undefined
+  );
 
   // get and store access token
   useEffect(() => {
@@ -176,7 +152,6 @@ function App() {
     }
     setPrevious(newPrev);
     setAlbum(newAlbum);
-    setUrl(newAlbum);
   };
 
   const handleOpenAlbum = () => {
