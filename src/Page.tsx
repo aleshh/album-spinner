@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePalette } from "react-palette";
 import Tooltip from "@material-ui/core/Tooltip";
 import useLongPress from "./hooks/useLongPress";
@@ -11,6 +11,11 @@ type PageProps = {
   imageUrl: string;
 };
 
+/**
+ *
+ * @param param0 asdf
+ * @returns
+ */
 const Page = ({
   onOpenAlbum,
   onNewAlbum,
@@ -19,8 +24,10 @@ const Page = ({
   imageUrl,
 }: PageProps): JSX.Element => {
   const [tooltipText, setTooltipText] = useState("");
+  const textRef = useRef<HTMLTextAreaElement>(null);
   const { data: colors } = usePalette(imageUrl);
   const albumString = `${artist} — ${albumName}`;
+  const copyString = `${artist} ${albumName}`;
 
   // clear tooltip text after a few seconds
   useEffect(() => {
@@ -30,14 +37,9 @@ const Page = ({
   }, [tooltipText]);
 
   const onPrimaryLongPress = () => {
-    navigator.clipboard.writeText(`${artist} ${albumName}`).then(
-      function () {
-        setTooltipText("Album name copied");
-      },
-      function (e) {
-        setTooltipText("Album name copy failed!");
-      }
-    );
+    textRef.current?.select();
+    document.execCommand("copy");
+    setTooltipText("Album name copied");
   };
 
   const primaryButtonEvents = useLongPress(onPrimaryLongPress, onOpenAlbum, {
@@ -52,6 +54,15 @@ const Page = ({
         backgroundImage: `linear-gradient(${colors.vibrant}, ${colors.darkMuted}`,
       }}
     >
+      <textarea
+        ref={textRef}
+        value={copyString}
+        onChange={() => {}}
+        style={{
+          position: "absolute",
+          left: -9999,
+        }}
+      />
       <div className="content">
         <div className="imageContainer">
           {imageUrl && (
