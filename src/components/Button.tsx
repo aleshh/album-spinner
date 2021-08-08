@@ -22,7 +22,6 @@ const Button = ({
     variant === "primary"
       ? {
           backgroundColor: colors?.lightVibrant,
-          borderColor: colors?.lightVibrant,
           color: colors?.darkMuted,
         }
       : {

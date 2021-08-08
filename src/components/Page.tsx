@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import { Share, Copy, RefreshCw } from "react-feather";
 import { usePalette } from "react-palette";
 import copyToClipboard from "../utils/copyToClipboard";
 import Button from "./Button";
@@ -52,21 +53,24 @@ const Page = ({
         </div>
         <h2 style={{ color: colors.lightVibrant }}>{albumString}</h2>
         <Button ariaLabel="new pick" onClick={onNewAlbum} colors={colors}>
-          New pick
+          <RefreshCw />
         </Button>
         <Button
           aria-label={`Play album ${albumString}`}
+          colors={colors}
           onClick={onOpenAlbum}
           variant="primary"
         >
-          Play this
+          <Share width="30" height="30" />
         </Button>
         <Button
           tooltipText={tooltipText}
+          colors={colors}
           aria-label={`Copy album artist and title ${copyString}`}
           onClick={handleCopyText}
-          children="Copy"
-        />
+        >
+          <Copy />
+        </Button>
       </div>
     </div>
   );
