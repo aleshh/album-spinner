@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Page from "./Page";
+import Page from "./components/Page";
 import albums from "./albums";
 import credentials from "./credentials";
 import { Album, SpotifyData } from "./interfaces";

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { usePalette } from "react-palette";
-import Tooltip from "@material-ui/core/Tooltip";
-import useLongPress from "./hooks/useLongPress";
+import copyToClipboard from "../utils/copyToClipboard";
+import Button from "./Button";
 
 type PageProps = {
   onOpenAlbum: () => void;
@@ -11,11 +11,6 @@ type PageProps = {
   imageUrl: string;
 };
 
-/**
- *
- * @param param0 asdf
- * @returns
- */
 const Page = ({
   onOpenAlbum,
   onNewAlbum,
@@ -24,7 +19,6 @@ const Page = ({
   imageUrl,
 }: PageProps): JSX.Element => {
   const [tooltipText, setTooltipText] = useState("");
-  const textRef = useRef<HTMLTextAreaElement>(null);
   const { data: colors } = usePalette(imageUrl);
   const albumString = `${artist} — ${albumName}`;
   const copyString = `${artist} ${albumName}`;
@@ -36,16 +30,10 @@ const Page = ({
     }, 3000);
   }, [tooltipText]);
 
-  const onPrimaryLongPress = () => {
-    textRef.current?.select();
-    document.execCommand("copy");
+  const handleCopyText = () => {
+    copyToClipboard(copyString);
     setTooltipText("Album name copied");
   };
-
-  const primaryButtonEvents = useLongPress(onPrimaryLongPress, onOpenAlbum, {
-    shouldPreventDefault: true,
-    delay: 500,
-  });
 
   return (
     <div
@@ -54,15 +42,6 @@ const Page = ({
         backgroundImage: `linear-gradient(${colors.vibrant}, ${colors.darkMuted}`,
       }}
     >
-      <textarea
-        ref={textRef}
-        value={copyString}
-        onChange={() => {}}
-        style={{
-          position: "absolute",
-          left: -9999,
-        }}
-      />
       <div className="content">
         <div className="imageContainer">
           {imageUrl && (
@@ -72,31 +51,22 @@ const Page = ({
           )}
         </div>
         <h2 style={{ color: colors.lightVibrant }}>{albumString}</h2>
-        <button
-          className="button"
-          type="button"
-          onClick={onNewAlbum}
-          style={{
-            borderColor: colors.lightVibrant,
-            color: colors.lightVibrant,
-          }}
-        >
+        <Button ariaLabel="new pick" onClick={onNewAlbum} colors={colors}>
           New pick
-        </button>
-        <Tooltip open={!!tooltipText} title={tooltipText} arrow placement="top">
-          <button
-            className="button"
-            type="button"
-            {...primaryButtonEvents}
-            style={{
-              backgroundColor: colors.lightVibrant,
-              borderColor: colors.lightVibrant,
-              color: colors.darkMuted,
-            }}
-          >
-            Play this
-          </button>
-        </Tooltip>
+        </Button>
+        <Button
+          aria-label={`Play album ${albumString}`}
+          onClick={onOpenAlbum}
+          variant="primary"
+        >
+          Play this
+        </Button>
+        <Button
+          tooltipText={tooltipText}
+          aria-label={`Copy album artist and title ${copyString}`}
+          onClick={handleCopyText}
+          children="Copy"
+        />
       </div>
     </div>
   );
