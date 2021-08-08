@@ -61,7 +61,7 @@ const Page = ({
           onClick={onOpenAlbum}
           variant="primary"
         >
-          <Share width="30" height="30" />
+          <Share size={30} />
         </Button>
         <Button
           tooltipText={tooltipText}
