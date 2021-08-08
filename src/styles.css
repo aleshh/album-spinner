@@ -64,16 +64,14 @@ h2 {
 }
 
 .button {
-  margin: 14px;
+  padding: 10px;
+  margin: 10px;
   margin-top: 4px;
   font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 54px;
-  width: 54px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  height: 46px;
+  border-radius: 23px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: none;
   font-weight: normal;
   outline: none;
   color: white;
@@ -83,10 +81,8 @@ h2 {
 }
 
 .button-primary {
-  font-size: 1.5rem;
-  height: 70px;
-  width: 70px;
-  border: none;
+  height: 56px;
+  border-radius: 28px;
 }
 
 .MuiTooltip-tooltip.MuiTooltip-tooltip {
