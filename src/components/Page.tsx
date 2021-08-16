@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Share, Copy, RefreshCw } from "react-feather";
+import { Copy, RefreshCw, ExternalLink } from "react-feather";
 import { usePalette } from "react-palette";
 import copyToClipboard from "../utils/copyToClipboard";
 import Button from "./Button";
@@ -61,7 +61,7 @@ const Page = ({
           onClick={onOpenAlbum}
           variant="primary"
         >
-          <Share size={30} />
+          <ExternalLink size={36} />
         </Button>
         <Button
           tooltipText={tooltipText}
