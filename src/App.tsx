@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import getAlbumUrl from "./utils/getAlbumUrl";
 import Page from "./components/Page";
 import albums from "./albums";
 import credentials from "./credentials";
 import { Album, SpotifyData } from "./interfaces";
+import { url } from "inspector";
 
 function encode(val: string): string {
   return val.replace(/\s/g, "+").replace(/,/g, "+");
@@ -142,7 +144,9 @@ function App() {
   }, [accessToken, album]);
 
   const { images, uri } = spotifyData || { images: [{ url: "" }], uri: "" };
-  const { url: imageUrl } = images[0];
+  const { url: spotifyUrl } = images[0] || {};
+  const localUrl = getAlbumUrl(album.artist, album.name);
+  const imageUrl = localUrl ? `assets/${localUrl}` : spotifyUrl;
 
   const handleNewAlbum = () => {
     const newAlbum = shuffleAlbum(previous);
