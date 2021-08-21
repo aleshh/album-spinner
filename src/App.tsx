@@ -5,7 +5,6 @@ import Page from "./components/Page";
 import albums from "./albums";
 import credentials from "./credentials";
 import { Album, SpotifyData } from "./interfaces";
-import { url } from "inspector";
 
 function encode(val: string): string {
   return val.replace(/\s/g, "+").replace(/,/g, "+");

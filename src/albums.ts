@@ -486,6 +486,11 @@ const albums: Album[] = [
   { artist: "Jimmy Smith", name: "Back at the Chicken Shack" },
   { artist: "Peter Tosh", name: "Legalize It" },
   { artist: "Albert Ayler", name: "Spiritual Unity" },
+  { artist: "Frank Sinatra", name: "Sinatra at the Sands" },
+  { artist: "Nina Simone", name: "Wild is the Wind" },
+  { artist: "Carole King", name: "Tapestry" },
+  { artist: "Jordi Savall", name: "Villancicos Danzas Criollas 1550-1750" },
+  // { artist: "", name: "" },
   // { artist: "", name: "" },
 ];
 

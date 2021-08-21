@@ -22,7 +22,9 @@ const Page = ({
   const [tooltipText, setTooltipText] = useState("");
   const { data: colors } = usePalette(imageUrl);
   const albumString = `${artist} — ${albumName}`;
-  const copyString = `${artist} ${albumName}`;
+  const copyString = `${artist} ${albumName}`
+    .replace(/[^\w\s ]/g, "")
+    .replace(/ +/g, " ");
 
   // clear tooltip text after a few seconds
   useEffect(() => {
