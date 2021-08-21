@@ -23,7 +23,7 @@ const Page = ({
   const { data: colors } = usePalette(imageUrl);
   const albumString = `${artist} — ${albumName}`;
   const copyString = `${artist} ${albumName}`
-    .replace(/[^\w\s ]/g, "")
+    .replace(/[^\w\s ]/g, " ")
     .replace(/ +/g, " ");
 
   // clear tooltip text after a few seconds
