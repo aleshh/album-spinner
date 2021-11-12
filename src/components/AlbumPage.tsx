@@ -12,7 +12,7 @@ type PageProps = {
   imageUrl: string;
 };
 
-const Page = ({
+const AlbumPage = ({
   onOpenAlbum,
   onNewAlbum,
   artist,
@@ -78,4 +78,4 @@ const Page = ({
   );
 };
 
-export default Page;
+export default AlbumPage;

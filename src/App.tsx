@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import getAlbumUrl from "./utils/getAlbumUrl";
-import Page from "./components/Page";
+import AlbumPage from "./components/AlbumPage";
+import ErrorPage from "./components/ErrorPage";
 import albums from "./albums";
 import credentials from "./credentials";
 import { Album, SpotifyData } from "./interfaces";
@@ -45,6 +46,7 @@ function App() {
   const [spotifyData, setSpotifyData] = useState<SpotifyData | undefined>(
     undefined
   );
+  const [error, setError] = useState<string | undefined>(undefined);
 
   // get and store access token
   useEffect(() => {
@@ -55,23 +57,24 @@ function App() {
         `${credentials["Client ID"]}:${credentials["Client Secret"]}`
       );
 
-      const { access_token: newToken } = await fetch(
-        "https://accounts.spotify.com/api/token",
-        {
-          method: "POST",
-          body: "grant_type=client_credentials",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: `Basic ${authorization}`,
-          },
-        }
-      )
+      const response = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        body: "grant_type=client_credentials",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Basic ${authorization}`,
+        },
+      })
         .then((res) => res.json())
         .catch((error) => {
-          console.error(error);
+          console.log(error);
+          setError(error.toString());
         });
 
-      setAccessToken(newToken);
+      if (response) {
+        const { access_token: newToken } = response;
+        setAccessToken(newToken);
+      }
     };
 
     getAccessToken();
@@ -98,10 +101,12 @@ function App() {
       )
         .then((res) => res.json())
         .catch((error) => {
-          console.error(error);
+          console.log(error);
+          setError(error.toString());
         });
 
       if (response.error) {
+        setError(response?.error?.toString() || "Error");
         setAccessToken(undefined);
         return;
       }
@@ -161,8 +166,12 @@ function App() {
     window.open(uri);
   };
 
+  if (error) {
+    return <ErrorPage error={error} />;
+  }
+
   return (
-    <Page
+    <AlbumPage
       onOpenAlbum={handleOpenAlbum}
       onNewAlbum={handleNewAlbum}
       artist={album.artist}
