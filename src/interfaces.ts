@@ -1,6 +1,7 @@
 export interface Album {
   artist: string;
   name: string;
+  moods: Array<string>;
 }
 
 export interface SpotifyData {
