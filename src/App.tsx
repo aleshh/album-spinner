@@ -6,47 +6,23 @@ import ErrorPage from "./components/ErrorPage";
 import albums from "./albums";
 import credentials from "./credentials";
 import { Album, SpotifyData } from "./interfaces";
-
-function encode(val: string): string {
-  return val.replace(/\s/g, "+").replace(/,/g, "+");
-}
-
-function fuzzyMatch(val1: string, val2: string): number {
-  const encode = (val: string): string =>
-    val.toLowerCase().replace(/[^0-9a-zA-Z]/g, "");
-
-  val1 = encode(val1);
-  val2 = encode(val2);
-
-  if (val1 === val2) return 2;
-  if (val1.indexOf(val2) !== -1 || val2.indexOf(val1) !== -1) return 1;
-  return 0;
-}
-
-function shuffleAlbum(previous: Array<Album>): Album {
-  let isNew = false;
-  let album: Album;
-  const search = (prev: Album): boolean => prev === album;
-
-  do {
-    const i = Math.floor(Math.random() * albums.length);
-    album = albums[i];
-    if (!previous.find(search)) {
-      isNew = true;
-    }
-  } while (!isNew);
-
-  return album;
-}
+import encode from "./utils/encode";
+import fuzzyMatch from "./utils/fuzzyMatch";
+import shuffleAlbum from "./utils/shuffleAlbum";
 
 function App() {
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
-  const [album, setAlbum] = useState<Album>(shuffleAlbum([]));
+  const [album, setAlbum] = useState<Album>(shuffleAlbum(albums, []));
   const [previous, setPrevious] = useState<Album[]>([]);
   const [spotifyData, setSpotifyData] = useState<SpotifyData | undefined>(
     undefined
   );
   const [error, setError] = useState<string | undefined>(undefined);
+
+  const handleError = (err: string | object | undefined): void => {
+    const error = err?.toString() || "Unknown error";
+    setError(error);
+  };
 
   // get and store access token
   useEffect(() => {
@@ -66,9 +42,8 @@ function App() {
         },
       })
         .then((res) => res.json())
-        .catch((error) => {
-          console.log(error);
-          setError(error.toString());
+        .catch((err) => {
+          handleError(err);
         });
 
       if (response) {
@@ -100,13 +75,12 @@ function App() {
         }
       )
         .then((res) => res.json())
-        .catch((error) => {
-          console.log(error);
-          setError(error.toString());
+        .catch((err) => {
+          handleError(err);
         });
 
       if (response.error) {
-        setError(response?.error?.toString() || "Error");
+        handleError(response.error);
         setAccessToken(undefined);
         return;
       }
@@ -153,7 +127,7 @@ function App() {
   const imageUrl = localUrl ? `assets/${localUrl}` : spotifyUrl;
 
   const handleNewAlbum = () => {
-    const newAlbum = shuffleAlbum(previous);
+    const newAlbum = shuffleAlbum(albums, previous);
     const newPrev = [newAlbum, ...previous];
     if (newPrev.length > albums.length / 2) {
       newPrev.pop();
