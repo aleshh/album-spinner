@@ -7,6 +7,7 @@ type ButtonProps = {
   onClick: () => void;
   tooltipText?: string;
   variant?: "primary" | "secondary";
+  style?: object;
 };
 
 const Button = ({
@@ -16,18 +17,14 @@ const Button = ({
   onClick,
   tooltipText,
   variant,
+  style: styleProp,
   ...rest
 }: ButtonProps): JSX.Element => {
-  const style =
-    variant === "primary"
-      ? {
-          backgroundColor: colors?.lightVibrant,
-          color: colors?.darkMuted,
-        }
-      : {
-          borderColor: colors?.lightVibrant,
-          color: colors?.lightVibrant,
-        };
+  const style = {
+    borderColor: colors?.lightVibrant,
+    color: colors?.lightVibrant,
+    ...styleProp,
+  };
 
   const button = (
     <button

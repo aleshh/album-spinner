@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Copy, RefreshCw, ExternalLink } from "react-feather";
+import { Copy, RefreshCw, ExternalLink, Layers } from "react-feather";
 import { usePalette } from "react-palette";
 import copyToClipboard from "../utils/copyToClipboard";
 import Button from "./Button";
@@ -48,12 +48,20 @@ const AlbumPage = ({
         backgroundImage: `linear-gradient(${colors.vibrant}, ${colors.darkMuted}`,
       }}
     >
-      <MoodSelect
+      <Button
+        ariaLabel="change mood"
+        colors={colors}
+        onClick={() => {}}
+        style={{ position: "absolute", top: 10, right: 10 }}
+      >
+        <Layers />
+      </Button>
+      {/* <MoodSelect
         color={colors?.lightVibrant || "white"}
         onMoodChange={handleMoodChange}
         mood="morning"
         moods={["morning", "minimal"]}
-      />
+      /> */}
       <div className="content">
         <div className="imageContainer">
           {imageUrl && (
