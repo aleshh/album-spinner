@@ -3,6 +3,7 @@ import { Copy, RefreshCw, ExternalLink } from "react-feather";
 import { usePalette } from "react-palette";
 import copyToClipboard from "../utils/copyToClipboard";
 import Button from "./Button";
+import MoodSelect from "./MoodSelect";
 
 type PageProps = {
   onOpenAlbum: () => void;
@@ -38,6 +39,8 @@ const AlbumPage = ({
     setTooltipText("Album name copied");
   };
 
+  const handleMoodChange = () => {};
+
   return (
     <div
       className="container"
@@ -45,6 +48,12 @@ const AlbumPage = ({
         backgroundImage: `linear-gradient(${colors.vibrant}, ${colors.darkMuted}`,
       }}
     >
+      <MoodSelect
+        color={colors?.lightVibrant || "white"}
+        onMoodChange={handleMoodChange}
+        mood="morning"
+        moods={["morning", "minimal"]}
+      />
       <div className="content">
         <div className="imageContainer">
           {imageUrl && (
