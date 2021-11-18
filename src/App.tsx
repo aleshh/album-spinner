@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./App.css";
 import getAlbumUrl from "./utils/getAlbumUrl";
 import AlbumPage from "./components/AlbumPage";
 import ErrorPage from "./components/ErrorPage";
-import albums from "./albums";
+import allAlbums from "./albums";
 import credentials from "./credentials";
 import { Album, SpotifyData } from "./interfaces";
 import encode from "./utils/encode";
@@ -11,6 +11,14 @@ import fuzzyMatch from "./utils/fuzzyMatch";
 import shuffleAlbum from "./utils/shuffleAlbum";
 
 function App() {
+  const moods: string[] = useMemo(
+    () => Array.from(new Set(allAlbums.map((album) => album.mood))),
+    []
+  );
+  const initialMood = moods[0];
+
+  const [albums, setAlbums] = useState(allAlbums);
+
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
   const [album, setAlbum] = useState<Album>(shuffleAlbum(albums, []));
   const [previous, setPrevious] = useState<Album[]>([]);
@@ -18,6 +26,7 @@ function App() {
     undefined
   );
   const [error, setError] = useState<string | undefined>(undefined);
+  const [mood, setMood] = useState<string>(initialMood);
 
   const handleError = (err: string | object | undefined): void => {
     const error = err?.toString() || "Unknown error";
@@ -121,6 +130,15 @@ function App() {
     getAlbum();
   }, [accessToken, album]);
 
+  // update albums when mood changes
+  useEffect(() => {
+    setAlbums(allAlbums.filter((album) => album.mood === mood));
+    // TODO: update the album when this happens ... without adding a bunch of
+    // dependencies here? can we safely use handleNewAlbum here? can it be
+    // wrapped with a useCallback?
+    // time to re-read Abramov's useEffect Article?
+  }, [mood]);
+
   const { images, uri } = spotifyData || { images: [{ url: "" }], uri: "" };
   const { url: spotifyUrl } = images[0] || {};
   const localUrl = getAlbumUrl(album.artist, album.name);
@@ -151,6 +169,9 @@ function App() {
       artist={album.artist}
       albumName={album.name}
       imageUrl={imageUrl}
+      mood={mood}
+      moods={moods}
+      setMood={setMood}
     />
   );
 }

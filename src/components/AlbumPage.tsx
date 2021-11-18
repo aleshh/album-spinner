@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Copy, RefreshCw, ExternalLink, Layers } from "react-feather";
+import { Copy, RefreshCw, ExternalLink } from "react-feather";
 import { usePalette } from "react-palette";
 import copyToClipboard from "../utils/copyToClipboard";
 import Button from "./Button";
-import MoodSelect from "./MoodSelect";
+import MoodPicker from "./MoodPicker";
 
 type PageProps = {
   onOpenAlbum: () => void;
@@ -11,6 +11,9 @@ type PageProps = {
   artist: string;
   albumName: string;
   imageUrl: string;
+  mood: string;
+  moods: string[];
+  setMood: (mood: string) => void;
 };
 
 const AlbumPage = ({
@@ -19,6 +22,9 @@ const AlbumPage = ({
   artist,
   albumName,
   imageUrl,
+  mood,
+  moods,
+  setMood,
 }: PageProps): JSX.Element => {
   const [tooltipText, setTooltipText] = useState("");
   const { data: colors } = usePalette(imageUrl);
@@ -39,8 +45,6 @@ const AlbumPage = ({
     setTooltipText("Album name copied");
   };
 
-  const handleMoodChange = () => {};
-
   return (
     <div
       className="container"
@@ -48,20 +52,7 @@ const AlbumPage = ({
         backgroundImage: `linear-gradient(${colors.vibrant}, ${colors.darkMuted}`,
       }}
     >
-      <Button
-        ariaLabel="change mood"
-        colors={colors}
-        onClick={() => {}}
-        style={{ position: "absolute", top: 10, right: 10 }}
-      >
-        <Layers />
-      </Button>
-      {/* <MoodSelect
-        color={colors?.lightVibrant || "white"}
-        onMoodChange={handleMoodChange}
-        mood="morning"
-        moods={["morning", "minimal"]}
-      /> */}
+      <MoodPicker colors={colors} setMood={setMood} mood={mood} moods={moods} />
       <div className="content">
         <div className="imageContainer">
           {imageUrl && (
