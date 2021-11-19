@@ -1,5 +1,7 @@
 import { Album } from "../interfaces";
 
+// TODO fix this so that it's not imperative garbage?
+
 export default function shuffleAlbum(
   albums: Array<Album>,
   previous: Array<Album>
