@@ -5,12 +5,20 @@ import MenuItem from "@mui/material/MenuItem";
 import { Layers as Icon } from "react-feather";
 import Button from "./Button";
 
+const moodEmoji: any = {
+  morning: "🌞",
+  minimal: "🌾",
+  maximal: "🧞‍♂️",
+};
+
 type MoodPickerProps = {
   colors?: object;
   setMood: (mood: any) => void;
   mood: string;
   moods: string[];
 };
+const capitalize = (str: string): string =>
+  str.charAt(0).toUpperCase() + str.slice(1);
 
 const MoodPicker = ({
   setMood,
@@ -45,11 +53,19 @@ const MoodPicker = ({
         open={open}
       >
         <div style={{ padding: 30 }}>
-          <DialogTitle>Select mood</DialogTitle>
+          <DialogTitle
+            style={{ borderBottom: "1px solid black", marginBottom: 30 }}
+          >
+            Select mood
+          </DialogTitle>
 
-          {moods.map((mood) => (
-            <MenuItem key={mood} onClick={() => handleClick(mood)}>
-              {mood}
+          {moods.map((m) => (
+            <MenuItem
+              key={m}
+              selected={m === mood}
+              onClick={() => handleClick(m)}
+            >
+              {moodEmoji[m]} {capitalize(m)}
             </MenuItem>
           ))}
         </div>

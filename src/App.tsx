@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import "./App.css";
 import getAlbumUrl from "./utils/getAlbumUrl";
 import AlbumPage from "./components/AlbumPage";
@@ -130,15 +130,6 @@ function App() {
     getAlbum();
   }, [accessToken, album]);
 
-  // update albums when mood changes
-  useEffect(() => {
-    setAlbums(allAlbums.filter((album) => album.mood === mood));
-    // TODO: update the album when this happens ... without adding a bunch of
-    // dependencies here? can we safely use handleNewAlbum here? can it be
-    // wrapped with a useCallback?
-    // time to re-read Abramov's useEffect Article?
-  }, [mood]);
-
   const { images, uri } = spotifyData || { images: [{ url: "" }], uri: "" };
   const { url: spotifyUrl } = images[0] || {};
   const localUrl = getAlbumUrl(album.artist, album.name);
@@ -153,6 +144,15 @@ function App() {
     setPrevious(newPrev);
     setAlbum(newAlbum);
   };
+
+  // update albums when mood changes
+  useEffect(() => {
+    console.log("mood changed to", mood);
+    setAlbums(allAlbums.filter((album) => album.mood === mood));
+    handleNewAlbum();
+    // Arguably wrong to disable? Time to re-read Abramov's useEffect article!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mood]);
 
   const handleOpenAlbum = () => {
     window.open(uri);
