@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./App.css";
 import getAlbumUrl from "./utils/getAlbumUrl";
 import AlbumPage from "./components/AlbumPage";
@@ -145,13 +145,16 @@ function App() {
     setAlbum(newAlbum);
   };
 
-  // update albums when mood changes
+  // shuffle albums when they're filtered by mood
   useEffect(() => {
-    console.log("mood changed to", mood);
-    setAlbums(allAlbums.filter((album) => album.mood === mood));
     handleNewAlbum();
     // Arguably wrong to disable? Time to re-read Abramov's useEffect article!
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [albums]);
+
+  // update albums when mood changes
+  useEffect(() => {
+    setAlbums(allAlbums.filter((album) => album.mood === mood));
   }, [mood]);
 
   const handleOpenAlbum = () => {

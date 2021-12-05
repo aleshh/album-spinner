@@ -8,7 +8,7 @@ import Button from "./Button";
 const moodEmoji: any = {
   morning: "🌞",
   minimal: "🌾",
-  maximal: "🧞‍♂️",
+  maximal: "🐲",
 };
 
 type MoodPickerProps = {
@@ -17,8 +17,6 @@ type MoodPickerProps = {
   mood: string;
   moods: string[];
 };
-const capitalize = (str: string): string =>
-  str.charAt(0).toUpperCase() + str.slice(1);
 
 const MoodPicker = ({
   setMood,
@@ -44,7 +42,7 @@ const MoodPicker = ({
         }}
         style={{ position: "absolute", top: 10, right: 10 }}
       >
-        <Icon />
+        {moodEmoji[mood]}
       </Button>
       <Dialog
         onClose={() => {
@@ -54,7 +52,11 @@ const MoodPicker = ({
       >
         <div style={{ padding: 30 }}>
           <DialogTitle
-            style={{ borderBottom: "1px solid black", marginBottom: 30 }}
+            style={{
+              borderBottom: "1px solid black",
+              marginBottom: 10,
+              padding: 0,
+            }}
           >
             Select mood
           </DialogTitle>
@@ -64,8 +66,9 @@ const MoodPicker = ({
               key={m}
               selected={m === mood}
               onClick={() => handleClick(m)}
+              style={{ borderRadius: 10, textTransform: "capitalize" }}
             >
-              {moodEmoji[m]} {capitalize(m)}
+              {moodEmoji[m]} {m}
             </MenuItem>
           ))}
         </div>
