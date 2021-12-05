@@ -455,7 +455,17 @@ const albums: Album[] = [
   {
     artist: "William Basinski",
     name: "92982",
-    mood: "morning",
+    mood: "morning", // minimal
+  },
+  {
+    artist: "William Basinski",
+    name: "On Time Out of Time",
+    mood: "minimal", // morning
+  },
+  {
+    artist: "William Basinski",
+    name: "Selva Oscura",
+    mood: "minimal", // morning
   },
   {
     artist: "Clarice Jensen",
@@ -1390,7 +1400,7 @@ const albums: Album[] = [
   {
     artist: "Sun Araw",
     name: "FRKWYS Vol. 9: Sun Araw & M. Geddes Gengras meet The Congos",
-    mood: "morning",
+    mood: "morning", // minimal
   },
   {
     artist: "Beverly Glenn-Copeland",
@@ -1430,7 +1440,7 @@ const albums: Album[] = [
   {
     artist: "Mamman Sani",
     name: "La Musique Électronique Du Niger",
-    mood: "morning",
+    mood: "morning", // minimal
   },
   {
     artist: "Swing Slow",
@@ -1450,7 +1460,7 @@ const albums: Album[] = [
   {
     artist: "Emeralds",
     name: "Does It Look Like I'm Here?",
-    mood: "morning",
+    mood: "morning", // minimal
   },
   {
     artist: "Bendik Giske",
@@ -2252,6 +2262,86 @@ const albums: Album[] = [
     name: "Observation of Breath",
     mood: "minimal",
   },
+  {
+    artist: "Kaitlyn Aurelia Smith",
+    name: "Tides: Music for Meditation and Yoga",
+    mood: "minimal",
+  },
+  {
+    artist: "Nivhek",
+    name: "After its own death / Walking in a spiral towards the house",
+    mood: "minimal",
+  },
+  {
+    artist: "Emily A. Sprague",
+    name: "Water Memory",
+    mood: "minimal",
+  },
+  {
+    artist: "Emily A. Sprague",
+    name: "Mount Vision",
+    mood: "minimal",
+  },
+  {
+    artist: "Leo Svirsky",
+    name: "River Without Banks",
+    mood: "minimal",
+  },
+  {
+    artist: "Lee Konitz",
+    name: "Tenorlee",
+    mood: "morning", // jazz
+  },
+  {
+    artist: "Jai Paul",
+    name: "Leak 04-13 (Bait Ones)",
+    mood: "maximal",
+  },
+  {
+    artist: "100 gecs",
+    name: "1000 gecs",
+    mood: "maximal",
+  },
+  {
+    artist: "Emeralds",
+    name: "Does It Look Like I'm Here",
+    mood: "minimal",
+  },
+  {
+    artist: "U.S. Girls",
+    name: "A Poem Unlimited",
+    mood: "morning",
+  },
+  {
+    artist: "Sun Araw",
+    name: "Night Gallery",
+    mood: "minimal",
+  },
+  {
+    artist: "Julianna Barwick",
+    name: "Healing Is A Miracle",
+    mood: "minimal",
+  },
+  // {
+  //   artist: "",
+  //   name: "",
+  //   mood: "minimal",
+  // },
+  // {
+  //   artist: "",
+  //   name: "",
+  //   mood: "minimal",
+  // },
+  // {
+  //   artist: "",
+  //   name: "",
+  //   mood: "minimal",
+  // },
+  // {
+  //   artist: "",
+  //   name: "",
+  //   mood: "minimal",
+  // },
   // {
   //   artist: "",
   //   name: "",

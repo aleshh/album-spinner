@@ -42,7 +42,7 @@ const MoodPicker = ({
         }}
         style={{ position: "absolute", top: 10, right: 10 }}
       >
-        {moodEmoji[mood]}
+        <Icon />
       </Button>
       <Dialog
         onClose={() => {
