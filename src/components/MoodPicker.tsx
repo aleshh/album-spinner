@@ -12,7 +12,7 @@ const moodEmoji: any = {
 };
 
 type MoodPickerProps = {
-  colors?: object;
+  buttonColor?: string;
   setMood: (mood: any) => void;
   mood: string;
   moods: string[];
@@ -22,7 +22,7 @@ const MoodPicker = ({
   setMood,
   mood,
   moods,
-  colors,
+  buttonColor,
   ...rest
 }: MoodPickerProps): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -36,7 +36,7 @@ const MoodPicker = ({
     <>
       <Button
         ariaLabel="change mood"
-        colors={colors}
+        color={buttonColor}
         onClick={() => {
           setOpen(true);
         }}

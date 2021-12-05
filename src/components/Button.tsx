@@ -3,7 +3,7 @@ import Tooltip from "@mui/material/Tooltip";
 type ButtonProps = {
   ariaLabel?: string;
   children: any;
-  colors?: any;
+  color?: string;
   onClick: () => void;
   tooltipText?: string;
   variant?: "primary" | "secondary";
@@ -13,16 +13,17 @@ type ButtonProps = {
 const Button = ({
   ariaLabel,
   children,
-  colors,
+  color: colorProp,
   onClick,
   tooltipText,
   variant,
   style: styleProp,
   ...rest
 }: ButtonProps): JSX.Element => {
+  const color = colorProp || "white";
   const style = {
-    borderColor: colors?.lightVibrant,
-    color: colors?.lightVibrant,
+    borderColor: color,
+    color: color,
     ...styleProp,
   };
 

@@ -88,10 +88,6 @@ h2 {
   box-shadow: 0 0 50px rgba(0, 0, 0, 0);
 }
 
-.button:hover {
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
-}
-
 .button-primary {
   /* color: rgba(0, 0, 0, 0.8);
   background-color: white; */

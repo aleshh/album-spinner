@@ -45,6 +45,9 @@ const AlbumPage = ({
     setTooltipText("Album name copied");
   };
 
+  const topButtonColor = colors?.darkVibrant;
+  const bottomButtonColor = colors?.lightVibrant;
+
   return (
     <div
       className="container"
@@ -52,7 +55,12 @@ const AlbumPage = ({
         backgroundImage: `linear-gradient(${colors.vibrant}, ${colors.darkMuted}`,
       }}
     >
-      <MoodPicker colors={colors} setMood={setMood} mood={mood} moods={moods} />
+      <MoodPicker
+        buttonColor={topButtonColor}
+        setMood={setMood}
+        mood={mood}
+        moods={moods}
+      />
       <div className="content">
         <div className="imageContainer">
           {imageUrl && (
@@ -62,12 +70,16 @@ const AlbumPage = ({
           )}
         </div>
         <h2 style={{ color: colors.lightVibrant }}>{albumString}</h2>
-        <Button ariaLabel="new pick" onClick={onNewAlbum} colors={colors}>
+        <Button
+          ariaLabel="new pick"
+          onClick={onNewAlbum}
+          color={bottomButtonColor}
+        >
           <RefreshCw />
         </Button>
         <Button
           aria-label={`Play album ${albumString}`}
-          colors={colors}
+          color={bottomButtonColor}
           onClick={onOpenAlbum}
           variant="primary"
         >
@@ -75,7 +87,7 @@ const AlbumPage = ({
         </Button>
         <Button
           tooltipText={tooltipText}
-          colors={colors}
+          color={bottomButtonColor}
           aria-label={`Copy album artist and title ${copyString}`}
           onClick={handleCopyText}
         >
