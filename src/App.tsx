@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import "./App.css";
 import getAlbumUrl from "./utils/getAlbumUrl";
 import AlbumPage from "./components/AlbumPage";
+import StatusPage from "./components/StatusPage";
 import ErrorPage from "./components/ErrorPage";
 import allAlbums from "./albums";
 import credentials from "./credentials";
@@ -163,6 +164,18 @@ function App() {
 
   if (error) {
     return <ErrorPage error={error} />;
+  }
+
+  const message: string | null = (() => {
+    if (!accessToken) return "Attempting to contact Spotify...";
+    if (!spotifyData)
+      return `Attempting to download info and image for ${album.artist} – ${album.name}...`;
+
+    return null;
+  })();
+
+  if (message) {
+    return <StatusPage status={message} />;
   }
 
   return (
