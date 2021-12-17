@@ -2327,56 +2327,41 @@ const albums: Album[] = [
     name: "Music For Acoustic Instruments & Feedback",
     mood: "minimal",
   },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
-  // {
-  //   artist: "",
-  //   name: "",
-  //   mood: "minimal",
-  // },
+  {
+    artist: "Billie Eilish",
+    name: "Happier Than Ever",
+    mood: "family",
+  },
+  {
+    artist: "You’ll Never Get to Heaven",
+    name: "Wave Your Moonlight Hat for the Snowfall Train",
+    mood: "family",
+  },
+  {
+    artist: "Michael Hurley",
+    name: "The Time of the Foxgloves",
+    mood: "family",
+  },
+  {
+    artist: "Mahalia Jackson",
+    name: "Sings the Gospel Right Out of the Church",
+    mood: "family",
+  },
+  {
+    artist: "Helado Negro",
+    name: "Far In",
+    mood: "family",
+  },
+  {
+    artist: "desert sand feels warm at night",
+    name: "New World Disciples",
+    mood: "minimal",
+  },
+  {
+    artist: "Arooj Aftab",
+    name: "Siren Islands",
+    mood: "minimal",
+  },
   // {
   //   artist: "",
   //   name: "",
