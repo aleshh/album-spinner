@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
+import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import { Layers as Icon } from "react-feather";
 import Button from "./Button";
 
 const moodEmoji: any = {
-  morning: "🌞",
+  family: "🌞",
   minimal: "🌾",
-  maximal: "🐲",
+  // maximal: "🐲",
 };
 
 type MoodPickerProps = {
@@ -50,27 +50,37 @@ const MoodPicker = ({
         }}
         open={open}
       >
-        <div style={{ padding: 30 }}>
-          <DialogTitle
+        <div style={{ padding: 30, textAlign: "left" }}>
+          <Typography
             style={{
               borderBottom: "1px solid black",
-              marginBottom: 10,
               padding: 0,
+              paddingBottom: 10,
+              marginBottom: 10,
             }}
           >
             Select mood
-          </DialogTitle>
+          </Typography>
 
-          {moods.map((m) => (
-            <MenuItem
-              key={m}
-              selected={m === mood}
-              onClick={() => handleClick(m)}
-              style={{ borderRadius: 10, textTransform: "capitalize" }}
-            >
-              {moodEmoji[m]} {m}
-            </MenuItem>
-          ))}
+          {moods.map((m) =>
+            moodEmoji[m] ? (
+              <MenuItem
+                key={m}
+                selected={m === mood}
+                onClick={() => handleClick(m)}
+                style={{
+                  textAlign: "left",
+                  borderRadius: 10,
+                  textTransform: "capitalize",
+                  padding: 10,
+                  paddingLeft: 15,
+                  minWidth: 160,
+                }}
+              >
+                {moodEmoji[m]} {m}
+              </MenuItem>
+            ) : null
+          )}
         </div>
       </Dialog>
     </>
