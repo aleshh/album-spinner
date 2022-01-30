@@ -32,6 +32,7 @@ function App() {
   const handleError = (err: string | object | undefined): void => {
     const error = err?.toString() || "Unknown error";
     setError(error);
+    setAccessToken(undefined);
   };
 
   // get and store access token
@@ -59,11 +60,12 @@ function App() {
       if (response) {
         const { access_token: newToken } = response;
         setAccessToken(newToken);
+        if (error) setError(undefined);
       }
     };
 
     getAccessToken();
-  }, [accessToken]);
+  }, [accessToken, error]);
 
   // get and store album info
   useEffect(() => {
@@ -91,7 +93,6 @@ function App() {
 
       if (response.error) {
         handleError(response.error);
-        setAccessToken(undefined);
         return;
       }
 
