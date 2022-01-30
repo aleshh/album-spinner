@@ -13,9 +13,22 @@ import shuffleAlbum from "./utils/shuffleAlbum";
 
 function App() {
   const moods: string[] = useMemo(
-    () => Array.from(new Set(allAlbums.map((album) => album.mood))),
+    () =>
+      Array.from(
+        new Set(
+          allAlbums.reduce(
+            (arr: string[], album) => [...arr, ...album.moods],
+            []
+          )
+        )
+      ),
     []
   );
+
+  // const moods: string[] = useMemo(
+  //   () => Array.from(new Set(allAlbums.map((album) => album.mood))),
+  //   []
+  // );
   const initialMood = moods[0];
 
   const [albums, setAlbums] = useState(allAlbums);
@@ -156,7 +169,7 @@ function App() {
 
   // update albums when mood changes
   useEffect(() => {
-    setAlbums(allAlbums.filter((album) => album.mood === mood));
+    setAlbums(allAlbums.filter((album) => album.moods.includes(mood)));
   }, [mood]);
 
   const handleOpenAlbum = () => {

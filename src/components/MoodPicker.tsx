@@ -2,13 +2,12 @@ import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
-import { Layers as Icon } from "react-feather";
 import Button from "./Button";
 
 const moodEmoji: any = {
   family: "🌞",
-  minimal: "🌾",
-  // maximal: "🐲",
+  chill: "⚗️",
+  driving: "🚙",
 };
 
 type MoodPickerProps = {
@@ -40,9 +39,14 @@ const MoodPicker = ({
         onClick={() => {
           setOpen(true);
         }}
-        style={{ position: "absolute", top: 10, right: 10 }}
+        style={{
+          position: "absolute",
+          top: 10,
+          right: 10,
+          filter: "grayscale(50%)",
+        }}
       >
-        <Icon />
+        {moodEmoji[mood]}
       </Button>
       <Dialog
         onClose={() => {
