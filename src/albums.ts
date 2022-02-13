@@ -1003,7 +1003,7 @@ const albums: Album[] = [
     name: "Broken English",
     moods: ["family"],
   },
-  /////////////////////////////////////////////////
+  ///////////////////////////////////////////////// here
   {
     artist: "Marianne Faithfull",
     name: "Negative Capability",
@@ -1237,7 +1237,7 @@ const albums: Album[] = [
   {
     artist: "Pauline Oliveros",
     name: "Deep Listening",
-    moods: ["family"],
+    moods: ["family", "chill"],
   },
   {
     artist: "Suzanne Ciani",
@@ -2354,6 +2354,21 @@ const albums: Album[] = [
     name: "Siren Islands",
     moods: ["chill"],
   },
+  {
+    artist: "Big Star",
+    name: "Radio City",
+    moods: ["family", "car"],
+  },
+  {
+    artist: "Bill Frisell",
+    name: "Bill Frisell Quartet",
+    moods: ["family"],
+  },
+  // {
+  //   artist: "",
+  //   name: "",
+  //   moods: [""],
+  // },
 ];
 
 export default albums;
