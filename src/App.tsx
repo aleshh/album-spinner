@@ -11,6 +11,10 @@ import encode from "./utils/encode";
 import fuzzyMatch from "./utils/fuzzyMatch";
 import shuffleAlbum from "./utils/shuffleAlbum";
 
+const moodKey = "mood";
+
+const moodFromStorage = localStorage.getItem(moodKey);
+
 function App() {
   const moods: string[] = useMemo(
     () =>
@@ -29,7 +33,7 @@ function App() {
   //   () => Array.from(new Set(allAlbums.map((album) => album.mood))),
   //   []
   // );
-  const initialMood = moods[0];
+  const initialMood = moodFromStorage || moods[0];
 
   const [albums, setAlbums] = useState(allAlbums);
 
@@ -41,6 +45,11 @@ function App() {
   );
   const [error, setError] = useState<string | undefined>(undefined);
   const [mood, setMood] = useState<string>(initialMood);
+
+  const handleSetMood = (mood: string) => {
+    localStorage.setItem(moodKey, mood);
+    setMood(mood);
+  };
 
   const handleError = (err: string | object | undefined): void => {
     const error = err?.toString() || "Unknown error";
@@ -201,7 +210,7 @@ function App() {
       imageUrl={imageUrl}
       mood={mood}
       moods={moods}
-      setMood={setMood}
+      setMood={handleSetMood}
     />
   );
 }
