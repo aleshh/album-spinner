@@ -29,14 +29,9 @@ function App() {
     []
   );
 
-  // const moods: string[] = useMemo(
-  //   () => Array.from(new Set(allAlbums.map((album) => album.mood))),
-  //   []
-  // );
   const initialMood = moodFromStorage || moods[0];
 
   const [albums, setAlbums] = useState(allAlbums);
-
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
   const [album, setAlbum] = useState<Album>(shuffleAlbum(albums, []));
   const [previous, setPrevious] = useState<Album[]>([]);

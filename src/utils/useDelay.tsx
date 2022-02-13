@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useDelay() {
+export default function useDelay() {
   const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
@@ -13,5 +13,3 @@ function useDelay() {
 
   return show;
 }
-
-export default useDelay;
