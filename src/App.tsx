@@ -29,7 +29,10 @@ function App() {
     []
   );
 
-  const initialMood = moodFromStorage || moods[0];
+  const initialMood =
+    moodFromStorage && moods.includes(moodFromStorage)
+      ? moodFromStorage
+      : moods[0];
 
   const [albums, setAlbums] = useState(allAlbums);
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
