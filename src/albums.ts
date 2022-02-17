@@ -20,7 +20,7 @@ const albums: Album[] = [
   {
     artist: "The Mountain Goats",
     name: "Get Lonely",
-    moods: ["family", "chill", "driving"],
+    moods: ["family", "driving"],
   },
   {
     artist: "Tom Petty and the Heartbreakers",
@@ -2357,12 +2357,17 @@ const albums: Album[] = [
   {
     artist: "Big Star",
     name: "Radio City",
-    moods: ["family", "car"],
+    moods: ["family", "driving"],
   },
   {
     artist: "Bill Frisell",
     name: "Bill Frisell Quartet",
     moods: ["family"],
+  },
+  {
+    artist: "GAS",
+    name: "Pop",
+    moods: ["chill"],
   },
   // {
   //   artist: "",
